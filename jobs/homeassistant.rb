@@ -177,6 +177,17 @@ get '/homeassistant/scene' do
 end
 
 
+get '/homeassistant/light' do
+	response = ha_api("states/light." + params["widgetId"], "get")
+	return JSON.generate({"state" => response["state"] })
+end
+
+post '/homeassistant/light' do
+	entity_id = "light." + params["widgetId"]
+	ha_api("services/light/turn_" + params["command"], "post", {"entity_id" => entity_id})
+	return respondWithSuccess()
+end
+
 get '/homeassistant/dimmer' do
 	response = ha_api("states/light." + params["widgetId"], "get")
 	if response["brightness"] == nil
