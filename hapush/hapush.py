@@ -44,6 +44,11 @@ def call_ha(widget_id, values):
   except requests.exceptions.RequestException as e:
     logger.warn("Unexpected error calling Dashing: %s", e)
 
+  # Dashing's response should be empty (Code 204) on POST calls to /widgets/
+  if response.status_code not in [requests.codes.ok, 204]:
+    logger.warn("Unexpected response calling Dashing: Code %d", response.status_code)
+    logger.warn("Content: %s", response.text)
+
 def process_message(msg):
   global logger
   global widgets
