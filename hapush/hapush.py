@@ -167,6 +167,7 @@ def translate_view(view):
         "Hascene": "scene",
         "Haswitch": "switch",
         "Hagroup": "group",
+        "Halight": "light",
         "Hadimmer": "light",
         "Hahumidity": "sensor",
         "Hainputselect": "input_select",
