@@ -197,7 +197,7 @@ def readDash(file):
 
     data_id = div.attrs.get('data-id')
     data_input = div.attrs.get('data-input')
-    data_view = div.attrs.get('data-view')
+    data_view = translate_view(div.attrs.get('data-view'))
 
     logger.debug("Found valid div with id '{}'".format(data_id, ))
     if not data_view in widgets:
