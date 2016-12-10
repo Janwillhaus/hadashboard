@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 ha_url = ""
 ha_key = ""
 dash_host = ""
+dash_auth_token = ""
 dash_dir = ""
 widgets = {}
 monitored_files = {}
@@ -37,6 +38,11 @@ def roundup(x):
 def call_ha(widget_id, values):
   global logger
   url = "http://" + dash_host + "/widgets/" + widget_id
+
+  # If present, append the auth_token
+  if dash_auth_token != "":
+      values['auth_token'] = dash_auth_token
+
   logger.debug(url)
   logger.debug(str(values))
   try:
@@ -270,6 +276,7 @@ def main():
   global ha_url
   global ha_key
   global dash_host
+  global dash_auth_token
   global dash_dir
   global logger
 
@@ -294,6 +301,8 @@ def main():
   if 'ha_key' in config:
     ha_key = config['ha_key']
   dash_host = config['dash_host']
+  if 'dash_auth_token' in config:
+    dash_auth_token = config['dash_auth_token']
   dash_dir = config['dash_dir']
   logfile = config['logfile']
 
