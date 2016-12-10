@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import json
 import sys
@@ -17,6 +17,7 @@ import math
 import pprint
 from sseclient import SSEClient
 from logging.handlers import RotatingFileHandler
+from bs4 import BeautifulSoup
 
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -187,50 +188,35 @@ def readDash(file):
 
   logger.info("Reading dashboard: %s", file)
 
-  div = re.compile('<div.+>')
-  id = re.compile('data-id\s*?=\s*?"(.+?)"')
-  input = re.compile('data-input\s*?=\s*?"(.+?)"')
-  view = re.compile('data-view\s*?=\s*?"(.+?)"')
-
   with open(file) as f:
-    for line in f:
+    soup = BeautifulSoup(f.read(), 'html.parser')
 
-      data_id = ""
-      data_input = ""
-      data_view = ""
+  # All divs with data-id are assumed to be widgets
+  for div in soup.find_all('div', attrs={'data-id': True}):
 
-      # Find a <div>
-      m1 = div.search(line)
-      if m1:
-        # Check for data-id
-        m2 = id.search(m1.group())
-        if m2:
-          # grab data-id
-          data_id = m2.group(1)
-          # grab data-view
-          m3 = view.search(m1.group())
-          if m3:
-            data_view = (translate_view(m3.group(1)))
-          # grab data-input
-          m4 = input.search(m1.group())
-          if m4:
-            data_input = m4.group(1)
+    data_id = div.attrs.get('data-id')
+    data_input = div.attrs.get('data-input')
+    data_view = div.attrs.get('data-view')
 
-      if data_id:
-        if not data_view in widgets:
-          widgets[data_view] = {}
-        if (data_input):
-          # If we have a data-input this is a special case of a script that shows status based on an input_select
-          # We need to register it as interested in events from that input select
-          if not "input_select" in widgets:
-            widgets["input_select"] = {}
-          if not data_input in widgets["input_select"]:
-            widgets["input_select"][data_input] = {}
-          widgets["input_select"][data_input][data_id] = data_view
-        else:
-          if not data_id in widgets[data_view]:
-            widgets[data_view][data_id] = {}
-          widgets[data_view][data_id][data_id] = data_view
+    logger.debug("Found valid div with id '{}'".format(data_id, ))
+    if not data_view in widgets:
+      widgets[data_view] = {}
+
+    if (data_input):
+      # If we have a data-input this is a special case of a script that shows status based on an input_select
+      # We need to register it as interested in events from that input select
+      if not "input_select" in widgets:
+        widgets["input_select"] = {}
+      if not data_input in widgets["input_select"]:
+        widgets["input_select"][data_input] = {}
+      widgets["input_select"][data_input][data_id] = data_view
+    else:
+      if not data_id in widgets[data_view]:
+        widgets[data_view][data_id] = {}
+      widgets[data_view][data_id][data_id] = data_view
+
+  logger.info('Found widgets:')
+  logger.info(widgets)
 
 def readDashboards():
   global monitored_files
