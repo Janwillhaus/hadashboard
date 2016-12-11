@@ -8,22 +8,13 @@ class Dashing.Clock extends Dashing.Widget
   startTime: =>
     today = new Date()
 
-    h = today.getHours()
-    m = today.getMinutes()
-    m = @formatTime(m)
-    @set('time', @formatHours(h) + ":" + m + " " + @formatAmPm(h))
-    @set('date', today.toLocaleDateString())
+    locale = navigator.languages[0]
+    if @get('locale')
+      locale = @get('locale')
 
-  formatTime: (i) ->
-    if i < 10 then "0" + i else i
+    dateoptions = {weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric'}
+    timeoptions = {hour: '2-digit', minute: 'numeric'}
 
-  formatAmPm: (h) ->
-    if h >= 12 then "PM" else "AM"
+    @set('date', today.toLocaleDateString(locale, dateoptions))
+    @set('time', today.toLocaleTimeString(locale, timeoptions))
 
-  formatHours: (h) ->
-    if h > 12
-      h - 12
-    else if h == 0
-      12
-    else
-      h
