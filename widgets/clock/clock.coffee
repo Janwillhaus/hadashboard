@@ -8,7 +8,9 @@ class Dashing.Clock extends Dashing.Widget
   startTime: =>
     today = new Date()
 
-    locale = navigator.languages[0]
+    locale = 'en-US'
+    if navigator.languages?
+      locale = navigator.languages[0]
     if @get('locale')
       locale = @get('locale')
 
