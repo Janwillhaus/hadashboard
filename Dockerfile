@@ -20,7 +20,7 @@ COPY . .
 RUN gem install dashing \
  && gem install bundler \
  && bundle \
- && pip3 install daemonize sseclient configobj \
+ && pip3 install daemonize sseclient configobj beautifulsoup4 \
  && pip3 install --upgrade requests
 
 
