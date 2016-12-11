@@ -37,7 +37,7 @@ def roundup(x):
 
 def call_ha(widget_id, values):
   global logger
-  url = "http://" + dash_host + "/widgets/" + widget_id
+  url = dash_host + "/widgets/" + widget_id
 
   # If present, append the auth_token
   if dash_auth_token != "":
