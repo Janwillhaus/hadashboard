@@ -43,7 +43,7 @@ body {
   background-color: $background-color;
   font-size: 15px;
   color: $text-color;
-  font-family: 'Helvetica Neue', 'Helvetica', 'Open Sans', 'Arial'
+  font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial';
 }
 
 b, strong {
@@ -92,17 +92,17 @@ h1 {
   margin-bottom: 6px;
   text-align: center;
   font-size: 100%;
-  font-weight: 200;
+  font-weight: normal;
 }
 h2 {
   text-transform: uppercase;
   font-size: 300%;
-  font-weight: 400;
+  font-weight: bold;
   color: $text-color;
 }
 h3 {
   font-size: 125%;
-  font-weight: 300;
+  font-weight: bold;
   color: $text-color;
 }
 
