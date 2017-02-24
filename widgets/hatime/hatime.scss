@@ -1,0 +1,14 @@
+@import "variables";
+
+// ----------------------------------------------------------------------------
+// Widget-hasensor styles
+// ----------------------------------------------------------------------------
+.widget-hasun {
+
+  .value {
+  	color: $blue;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 200%;
+  }
+}
