@@ -16,11 +16,11 @@ class Dashing.Hadevicetracker extends Dashing.ClickableWidget
     set: Batman.Property.defaultAccessor.set
 
   @accessor 'iconon',
-    get: -> @['iconon'] ? 'user'
+    get: -> @['iconon'] ? 'home'
     set: Batman.Property.defaultAccessor.set
 
   @accessor 'iconoff',
-    get: -> @['iconoff'] ? 'times'
+    get: -> @['iconoff'] ? 'rocket'
     set: Batman.Property.defaultAccessor.set
 
   @accessor 'icon-style', ->
