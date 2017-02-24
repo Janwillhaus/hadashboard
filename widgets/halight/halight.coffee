@@ -52,5 +52,4 @@ class Dashing.Halight extends Dashing.ClickableWidget
   onData: (data) ->
 
   onClick: (event) ->
-    if event.target.id == "switch"
-      @postState()
+    @postState()
