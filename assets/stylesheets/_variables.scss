@@ -11,25 +11,26 @@
 //    2. Uncomment the @import line at the bottom of this file
 // ----------------------------------------------------------------------------
 
-$white: #fff;
+$white: #eee;
 $red: #ff0055;
 $green: #aaff00;
-$blue: #00aaff;
-$purple: #aa00ff;
+$blue: #fff;
+$purple: #fff;
 $yellow: #ffff00;
-$orange: #ffaa00;
+$orange: #fff; //#ffaa00;
 
 $gray-dark: #444;
 $gray-medium: #666;
 $gray-light: #888;
 
 //Page and widget defaults
-$background-color: #222;
-$text-color: #fff;
+$background-color: #111;
+$text-color: #eee;
+$widget-background: rgba(100,100,100,0.1); //#336;
 
 //These are used for icons and indicators
-$color-inactive: $gray-light;
-$color-active: $green;
+$color-inactive: #111;
+$color-active: #eee;
 
 //Warnings and alerts
 $background-warning-color-1: #e82711;
@@ -39,6 +40,10 @@ $text-warning-color: #fff;
 $background-danger-color-1: #eeae32;
 $background-danger-color-2: #ff9618;
 $text-danger-color: #fff;
+
+.widget{
+    border-radius: 2px;
+}
 
 // Uncomment to include your custom variables/overrides
 // @import "variables_custom"
