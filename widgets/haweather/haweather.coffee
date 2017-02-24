@@ -21,6 +21,22 @@ class Dashing.Haweather extends Dashing.Widget
     get: -> if @_temp then Math.floor(@_temp) else 0
     set: (key, value) -> @_temp = value
 
+  @accessor 'precipintensity',
+    get: -> if @_precipintensity then Math.round(@_precipintensity) else 0 
+    set: (key, value) -> @_precipintensity = value
+
+  @accessor 'precip',
+    get: -> if @_precip then Math.round(@_precip) else 0 
+    set: (key, value) -> @_precip = value
+
+  @accessor 'pressure',
+    get: -> if @_pressure then Math.round(@_pressure) else 0 
+    set: (key, value) -> @_pressure = value
+
+  @accessor 'humidity',
+    get: -> if @_humidity then Math.round(@_humidity) else 0 
+    set: (key, value) -> @_humidity = value
+
   ready: ->
     if @get('bgcolor')
       $(@node).css("background-color", @get('bgcolor'))
