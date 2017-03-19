@@ -1,5 +1,5 @@
-FROM ruby:2.2.5
-MAINTAINER Marijn Giesen <marijn@studio-donder.nl>
+FROM ruby:2.2
+MAINTAINER Jan Willhaus <mail@janwillhaus.de>
 
 RUN apt-get update \
  && apt-get install -y \
