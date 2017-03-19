@@ -1,5 +1,22 @@
 FROM ruby:2.2
 MAINTAINER Jan Willhaus <mail@janwillhaus.de>
+LABEL org.freenas.interactive="false" \
+      org.freenas.version="1" \
+      org.freenas.upgradeable="true" \
+      org.freenas.expose-ports-at-host="true" \
+      org.freenas.autostart="true" \
+      org.freenas.web-ui-protocol="http" \
+      org.freenas.web-ui-port="3030" \
+      org.freenas.web-ui-path="" \
+      org.freenas.port-mappings="3030:3030/tcp" \
+      org.freenas.volumes="[						\
+          {								\
+              \"name\": \"/app\",					\
+              \"descr\": \"Application\"			\
+          }								\
+      ]" \
+      org.freenas.settings="[ 					\
+      ]"
 
 RUN apt-get update \
  && apt-get install -y \
