@@ -1,6 +1,6 @@
 FROM ruby:2.2.5
 LABEL org.freenas.interactive="false" \
-      org.freenas.version="2" \
+      org.freenas.version="2.1" \
       org.freenas.upgradeable="true" \
       org.freenas.expose-ports-at-host="true" \
       org.freenas.autostart="true" \
