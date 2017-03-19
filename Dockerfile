@@ -1,6 +1,6 @@
 FROM ruby:2.2
 LABEL org.freenas.interactive="false" \
-      org.freenas.version="1" \
+      org.freenas.version="1.1" \
       org.freenas.upgradeable="true" \
       org.freenas.expose-ports-at-host="true" \
       org.freenas.autostart="true" \
@@ -22,7 +22,7 @@ LABEL org.freenas.interactive="false" \
              \"descr\": \"Lib\"			\
           },
       ]"
-      
+
 MAINTAINER Jan Willhaus <mail@janwillhaus.de>
 
 RUN apt-get update \
