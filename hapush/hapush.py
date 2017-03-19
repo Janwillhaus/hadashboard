@@ -202,8 +202,8 @@ def readDash(file):
 
   logger.info("Reading dashboard: %s", file)
 
-  with open(file) as f:
-    soup = BeautifulSoup(f.read(), 'html.parser')
+  with open(file, encoding='utf-8') as f:
+    soup = BeautifulSoup(f, 'html.parser')
 
   # All divs with data-id are assumed to be widgets
   for div in soup.find_all('div', attrs={'data-id': True}):
