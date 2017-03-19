@@ -42,11 +42,15 @@ COPY . /
 RUN gem install dashing \
  && gem install bundler \
  && bundle \
- && pip3 install daemonize sseclient configobj beautifulsoup4 \
+ && pip3 install daemonize sseclient beautifulsoup4 \
  && pip3 install --upgrade requests
 
 EXPOSE 3030
 
 VOLUME /lib /dashboards /hapush
+
+ENV HA_URL=https://homeassistant
+ENV HA_KEY=myapikey
+ENV DASH_HOST=127.0.0.1:3030
 
 CMD /hapush/hapush.py && dashing start

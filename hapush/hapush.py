@@ -6,7 +6,7 @@ import sys
 import traceback
 import re
 import requests
-from configobj import ConfigObj
+from configparser import ConfigParser
 import datetime
 import argparse
 import time
@@ -14,6 +14,7 @@ from daemonize import Daemonize
 import logging
 import glob
 import os.path
+from os import getenv
 import math
 import pprint
 from sseclient import SSEClient
@@ -202,7 +203,7 @@ def readDash(file):
   logger.info("Reading dashboard: %s", file)
 
   with open(file) as f:
-    soup = BeautifulSoup(f.read().encode('utf-8', 'ignore'), 'html.parser')
+    soup = BeautifulSoup(f.read(), 'html.parser')
 
   # All divs with data-id are assumed to be widgets
   for div in soup.find_all('div', attrs={'data-id': True}):
@@ -285,7 +286,7 @@ def main():
 
   parser = argparse.ArgumentParser()
 
-  parser.add_argument("config", help="full path to config file", type=str)
+  parser.add_argument("-c", "--config", help="full path to config file", type=str)
   parser.add_argument("-d", "--daemon", help="run as a background process", action="store_true")
   parser.add_argument("-p", "--pidfile", help="full path to PID File", default = "/tmp/hapush.pid")
   parser.add_argument("-D", "--debug", help="debug level", default = "INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"])
@@ -296,16 +297,31 @@ def main():
 
   # Read Config File
 
-  config = ConfigObj(config_file, file_error=True)
+  if config_file is not None:
+    config = ConfigParser()
+    config.read(config_file)
 
-  ha_url = config['ha_url']
-  if 'ha_key' in config:
-    ha_key = config['ha_key']
-  dash_host = config['dash_host']
-  if 'dash_auth_token' in config:
-    dash_auth_token = config['dash_auth_token']
-  dash_dir = config['dash_dir']
-  logfile = config['logfile']
+    ha_url = config['ha_url']
+    if 'ha_key' in config:
+      ha_key = config['ha_key']
+    dash_host = config['dash_host']
+    if 'dash_auth_token' in config:
+      dash_auth_token = config['dash_auth_token']
+    dash_dir = config['dash_dir']
+    logfile = config['logfile']
+
+  else:
+
+    ha_url = getenv('HA_URL', 'https://homeassistant')
+    if getenv('HA_KEY') is not None:
+      ha_key = getenv('HA_KEY')
+    dash_host = getenv('DASH_HOST', '127.0.0.1:3030')
+    if getenv('DASH_AUTH_TOKEN') is not None:
+      dash_auth_token = getenv('DASH_AUTH_TOKEN')
+    dash_dir = getenv('DASH_DIR', '/dashboards')
+    logfile = getenv('DASH_DIR', '/hapush/hapush.log')
+
+
 
   # Setup Logging
 
