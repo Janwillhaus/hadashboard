@@ -8,19 +8,19 @@ LABEL org.freenas.interactive="false" \
       org.freenas.web-ui-port="3030" \
       org.freenas.web-ui-path="" \
       org.freenas.port-mappings="3030:3030/tcp" \
-      org.freenas.volumes="[						\
-          {								\
-              \"name\": \"/app/dashboards\",					\
+      org.freenas.volumes="[					\
+          {										\
+              \"name\": \"/app/dashboards\",	\
               \"descr\": \"Dashboards\"			\
-          },								\
-          {								\
-             \"name\": \"/app/hapush\",					\
-             \"descr\": \"Hapush\"			\
-          },
-          {								\
-             \"name\": \"/app/lib\",					\
-             \"descr\": \"Lib\"			\
-          } \
+          }, 									\
+          {										\
+             \"name\": \"/app/hapush\",			\
+             \"descr\": \"Hapush\"		      	\
+          }, 									\
+          {										\
+             \"name\": \"/app/lib\",			\
+             \"descr\": \"Lib\"					\
+          } 									\
       ]"
 
 MAINTAINER Jan Willhaus <mail@janwillhaus.de>
