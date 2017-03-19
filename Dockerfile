@@ -1,4 +1,4 @@
-FROM ruby:2.2
+FROM ruby:2.2.5
 LABEL org.freenas.interactive="false" \
       org.freenas.version="1.2" \
       org.freenas.upgradeable="true" \
