@@ -20,7 +20,7 @@ LABEL org.freenas.interactive="false" \
           {								\
              \"name\": \"/app/lib\",					\
              \"descr\": \"Lib\"			\
-          },
+          } \
       ]"
 
 MAINTAINER Jan Willhaus <mail@janwillhaus.de>
