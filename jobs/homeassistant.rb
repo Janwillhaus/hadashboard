@@ -4,7 +4,10 @@ require 'net/http'
 $selectedDimmer = {}
 $alarm_control_panel_code = ""
 
+$ha_url = ENV['HA_URL'] || $ha_url
+$ha_apikey = ENV['HA_KEY'] || $ha_apikey
 $ha_api = $ha_url + "/api/"
+
 
 def ha_api(path, method, parameters={})
 	uri = URI.parse($ha_api + path)
