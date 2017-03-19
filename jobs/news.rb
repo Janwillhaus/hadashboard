@@ -53,6 +53,9 @@ class News
 end
 
 @News = []
+unless defined? $news_feeds
+    $news_feeds = {}
+end
 $news_feeds.each do |widget_id, feed|
   begin
     @News.push(News.new(widget_id, feed))
