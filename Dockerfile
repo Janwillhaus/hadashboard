@@ -21,7 +21,25 @@ LABEL org.freenas.interactive="false" \
              \"name\": \"/lib\",			\
              \"descr\": \"Lib\"					\
           } 									\
+      ]", \
+	  org.freenas.settings="[ 						\
+          {								\
+              \"env\": \"HA_URL\",						\
+              \"descr\": \"URL of Home Assistant\",		\
+              \"optional\": false					\
+          },								\
+          {								\
+              \"env\": \"HA_KEY\",					\
+              \"descr\": \"API Key for HA\",                         \
+              \"optional\": true					\
+          },								\
+          {								\
+              \"env\": \"DASH_HOST\",					\
+              \"descr\": \"Hostname (and Port) of Dashing Instance\",            		\
+              \"optional\": true					\
+          }								\
       ]"
+
 
 MAINTAINER Jan Willhaus <mail@janwillhaus.de>
 
