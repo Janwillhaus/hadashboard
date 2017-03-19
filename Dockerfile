@@ -1,6 +1,6 @@
 FROM ruby:2.2
 LABEL org.freenas.interactive="false" \
-      org.freenas.version="1.1" \
+      org.freenas.version="1.2" \
       org.freenas.upgradeable="true" \
       org.freenas.expose-ports-at-host="true" \
       org.freenas.autostart="true" \
@@ -10,15 +10,15 @@ LABEL org.freenas.interactive="false" \
       org.freenas.port-mappings="3030:3030/tcp" \
       org.freenas.volumes="[					\
           {										\
-              \"name\": \"/app/dashboards\",	\
+              \"name\": \"/dashboards\",	\
               \"descr\": \"Dashboards\"			\
           }, 									\
           {										\
-             \"name\": \"/app/hapush\",			\
+             \"name\": \"/hapush\",			\
              \"descr\": \"Hapush\"		      	\
           }, 									\
           {										\
-             \"name\": \"/app/lib\",			\
+             \"name\": \"/lib\",			\
              \"descr\": \"Lib\"					\
           } 									\
       ]"
@@ -35,11 +35,9 @@ RUN apt-get update \
       ruby-dev \
       python3 \
       python3-pip \
- && mkdir /app \
  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
-COPY . .
+COPY . /
 
 RUN gem install dashing \
  && gem install bundler \
@@ -47,9 +45,8 @@ RUN gem install dashing \
  && pip3 install daemonize sseclient configobj beautifulsoup4 \
  && pip3 install --upgrade requests
 
-
 EXPOSE 3030
 
-VOLUME /app/lib /app/dashboards /app/hapush
+VOLUME /lib /dashboards /hapush
 
-CMD /app/hapush/hapush.py -d /app/hapush/hapush.cfg && dashing start
+CMD /hapush/hapush.py && dashing start
