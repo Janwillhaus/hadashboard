@@ -21,7 +21,7 @@ LABEL org.freenas.interactive="false" \
              \"name\": \"/app/lib\",            \
              \"descr\": \"Lib\"                 \
           }                                     \
-      ]",                                       \
+      ]"                                        \
       org.freenas.settings="[                   \
           {                                     \
               \"env\": \"HA_URL\",              \
@@ -72,4 +72,4 @@ ENV HA_URL=https://homeassistant
 ENV HA_KEY=myapikey
 ENV DASH_HOST=127.0.0.1:3030
 
-CMD /app/hapush/hapush.py && dashing start
+ENTRYPOINT exec /app/hapush/hapush.py && dashing start
